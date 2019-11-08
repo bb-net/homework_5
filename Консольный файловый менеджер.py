@@ -1,5 +1,6 @@
 import os
-#Проверка Pull requests
+import sys
+
 while True:
     print("""
     1. Создать папку
