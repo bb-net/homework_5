@@ -1,5 +1,22 @@
 import os
-#Проверка Pull requests
+import sys
+import json
+
+listdir = {
+        'files': [],
+        'dirs': [],
+}
+def list_dir():
+    for file in os.listdir():
+        if os.path.isfile(file):
+            listdir['files'].append(file)
+        else:
+            listdir['dirs'].append(file)
+    with open('listdir.txt', 'w') as f:
+        json.dump(listdir, f)
+    print('Успешно сохранено "listdir.txt" в:', os.getcwd())
+
+
 while True:
     print("""
     1. Создать папку
@@ -13,7 +30,8 @@ while True:
     9. Играть в викторину
     10. Счет
     11. Смена рабочей директории
-    12. Выход
+    12. Сохранить содержимое рабочей директории в файл
+    13. Выход
     """)
 
     choice = input('Введите номер действия:')
@@ -40,14 +58,16 @@ while True:
     elif choice == '8': # Создатель программы
         print('© 2019 BB')
     elif choice == '9': # Викторина
-        import victorins
+        import victorin
     elif choice == '10':  # Счет
         import score
     elif choice == '11':  # Смена рабочей директории
         from functions_for_filemaneger import ch_dir
         for i in range(1):
             ch_dir()
-    elif choice == '12': # Выход
+    elif choice == '12': # Сохранение раб директории в файл
+        list_dir()
+    elif choice == '13': # Выход
         print('Программа завершена.')
         break
     else:
